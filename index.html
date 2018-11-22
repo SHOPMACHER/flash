@@ -1,0 +1,43 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <link rel="stylesheet" href="dist/sm-flash.css"/>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: sans-serif;
+    }
+  </style>
+
+  <title>SmFlash</title>
+</head>
+<body>
+
+<div class="sm-flash" data-closable="true" data-hide-after="1000">
+  <div class="inner-wrapper">
+    Beispiel Content
+  </div>
+</div>
+
+<button id="toggle" style="margin-top: 200px">Show</button>
+
+<script src="dist/sm-flash.js"></script>
+<script>
+  var $flash = document.querySelector('.sm-flash');
+  var flash = new SmFlash($flash);
+
+  document.querySelector('#toggle').addEventListener('click', () => {
+    return $flash.classList.contains('visible') ? flash.hide() : flash.show();
+  });
+</script>
+
+</body>
+</html>

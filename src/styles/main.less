@@ -1,0 +1,28 @@
+.sm-flash {
+  display: flex;
+  position: fixed;
+  background-color: papayawhip;
+  width: 100%;
+  padding: 16px;
+  align-items: center;
+  transform: translate3d(0, -100%, 0);
+  transition: transform 300ms ease-in-out;
+
+  &.visible {
+    transform: translate3d(0, 0, 0);
+  }
+
+  .inner-wrapper {
+    display: flex;
+    flex: 1;
+  }
+
+  .close-icon {
+    color: darkorange;
+    cursor: pointer;
+
+    &:after {
+      content: 'x';
+    }
+  }
+}
