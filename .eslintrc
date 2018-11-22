@@ -1,0 +1,29 @@
+{
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": 2018
+  },
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "rules": {
+    "indent": ["error", 4],
+    "global-require": "off",
+    "class-methods-use-this": "off",
+    "import/no-unresolved": "off",
+    "import/no-extraneous-dependencies": "off"
+  },
+  "extends": [
+    "eslint:recommended",
+    "airbnb-base"
+  ],
+  "overrides": [
+    {
+      "files": "src/**/*.test.js",
+      "env": {
+        "jest": true
+      }
+    }
+  ]
+}

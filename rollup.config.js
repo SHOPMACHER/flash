@@ -4,6 +4,7 @@ import serve from 'rollup-plugin-serve';
 import livereload from 'rollup-plugin-livereload';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import { terser } from 'rollup-plugin-terser';
+import autoprefixer from 'autoprefixer';
 
 import pkg from './package.json';
 
@@ -17,6 +18,9 @@ const plugins = [
     }),
     postcss({
         extract: true,
+        plugins: [
+            autoprefixer(),
+        ],
     }),
     nodeResolve({
         jsnext: true,
