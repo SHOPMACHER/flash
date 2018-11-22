@@ -10,11 +10,16 @@ export default class Flash {
             $closeIcon.addEventListener('click', this.hide.bind(this));
         }
 
-        const hideAfter = parseInt(this.$root.getAttribute('data-hide-after'), 10);
+        const hideAfter = parseInt(
+            this.$root.getAttribute('data-hide-after'),
+            10
+        );
         if (!Number.isNaN(hideAfter)) {
             setTimeout(this.hide.bind(this), hideAfter);
         } else {
-            throw new TypeError(`data-hide-after has to be of type number, but has value '${hideAfter}'`);
+            throw new TypeError(
+                `data-hide-after has to be of type number, but has value '${hideAfter}'`
+            );
         }
 
         this.$root.addEventListener('show', this.show.bind(this));

@@ -11,6 +11,7 @@
     "@babel/preset-env": "^7.1.6",
     "cross-env": "^5.2.0",
     "less": "^3.8.1",
+    "prettier": "^1.15.2",
     "rollup": "^0.67.3",
     "rollup-plugin-babel": "^4.0.3",
     "rollup-plugin-livereload": "^0.6.0",
