@@ -1,6 +1,6 @@
 {
   "name": "@shopmacher/flash",
-  "version": "1.0.0-alpha.2",
+  "version": "1.0.0-beta.1",
   "description": "Library for displaying flash/toast messages",
   "keywords": [
     "flash",
