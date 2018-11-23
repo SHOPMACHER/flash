@@ -1,13 +1,23 @@
 import Flash from './Flash';
+import { readFileSync } from 'fs';
+import { resolve } from 'path';
 
 import createBasicMarkup from './__fixtures__/basic.markup';
 import createHideAfterMarkup from './__fixtures__/hide-after.markup';
 
 describe('Flash class', () => {
+    let window = null;
     let instance = null;
 
     beforeAll(() => {
-        const { document } = createBasicMarkup();
+        window = createBasicMarkup();
+        const { document } = window;
+
+        const flashScript = readFileSync(resolve(__dirname, '../dist/sm-flash.js'));
+        const $script = document.createElement('script');
+        $script.textContent = flashScript;
+        document.head.appendChild($script);
+
         const $root = document.querySelector('.sm-flash');
         instance = new Flash($root);
     });
@@ -18,6 +28,12 @@ describe('Flash class', () => {
 
     it('exposes static init method', () => {
         expect(typeof Flash.init).toBe('function');
+    });
+
+    it('creates an array of instances', () => {
+        const instances = window.SmFlash.init();
+        expect(Array.isArray(instances)).toBe(true);
+        expect(instances.shift() instanceof window.SmFlash).toBe(true);
     });
 
     it('creates a new instance', () => {

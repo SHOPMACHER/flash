@@ -74,7 +74,6 @@ class Flash {
      */
     static init() {
         const $flashes = document.querySelectorAll('.sm-flash');
-
         return Array.prototype.map.call($flashes, $flash => new Flash($flash));
     }
 

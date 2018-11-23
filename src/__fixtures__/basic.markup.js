@@ -6,6 +6,6 @@ const { window } = new JSDOM(`
       This is a flash message.
     </div>
   </div>
-`);
+`, { runScripts: 'dangerously' });
 
 export default () => window;
