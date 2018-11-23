@@ -1,6 +1,7 @@
 import Flash from './Flash';
 
 import createBasicMarkup from './__fixtures__/basic.markup';
+import createHideAfterMarkup from './__fixtures__/hide-after.markup';
 
 describe('Flash class', () => {
     let instance = null;
@@ -29,6 +30,10 @@ describe('Flash class', () => {
 
     it('exposes instance method `hide`', () => {
         expect(typeof instance.hide).toBe('function');
+    });
+
+    it('exposes instance method `getRef`', () => {
+        expect(typeof instance.getRef).toBe('function');
     });
 });
 
@@ -63,5 +68,75 @@ describe('No parameters', () => {
         instance.hide();
         const contains = $root.classList.contains('visible');
         expect(contains).toBe(false);
+    });
+});
+
+describe('Hide after attribute', () => {
+    let $root = null;
+
+    beforeEach(() => {
+        const { document } = createHideAfterMarkup();
+        $root = document.querySelector('.sm-flash');
+    });
+
+    afterEach(() => {
+        $root = null;
+    });
+
+    it('throws TypeError if hide after is not a number', () => {
+        $root.setAttribute('data-hide-after', 'test');
+
+        try {
+            new Flash($root);
+        } catch (error) {
+            expect(error).toBeDefined();
+        }
+    });
+});
+
+describe('Create method', () => {
+    let instance = null;
+    let configuredInstance = null;
+
+    beforeAll(() => {
+        instance = Flash.create('a message');
+        configuredInstance = Flash.create('a message', {
+            closable: true,
+            hideAfter: 2000,
+        });
+    });
+
+    afterAll(() => {
+        instance = null;
+    });
+
+    it('returns a new flash instance', () => {
+        expect(instance instanceof Flash).toBe(true);
+    });
+
+    it('renders a valid DOM root element', () => {
+        const $root = instance.getRef();
+        const hasFlashClass = $root.classList.contains('sm-flash');
+        expect(hasFlashClass).toBe(true);
+    });
+
+    it('renders an inner wrapper', () => {
+        const $innerWrapper = instance.getRef().querySelector('.inner-wrapper');
+        expect($innerWrapper).toBeDefined();
+    });
+
+    it('renders a message into the inner wrapper', () => {
+        const $innerWrapper = instance.getRef().querySelector('.inner-wrapper');
+        expect($innerWrapper.innerHTML).toContain('message');
+    });
+
+    it('has a correct attribute for closing', () => {
+        const $root = configuredInstance.getRef();
+        expect($root.getAttribute('data-closable')).toBe('true');
+    });
+
+    it('has a correct attribute for time to hide', () => {
+        const $root = configuredInstance.getRef();
+        expect($root.getAttribute('data-hide-after')).toBe('2000');
     });
 });

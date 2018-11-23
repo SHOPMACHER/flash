@@ -1,5 +1,7 @@
 /**
  * Flash message that can be initialized with a DOM element.
+ *
+ * @property {HTMLElement} $root
  */
 class Flash {
     /**
@@ -56,6 +58,15 @@ class Flash {
     }
 
     /**
+     * Returns the DOM root element of the flash instance.
+     *
+     * @returns {HTMLElement} DOM root element
+     */
+    getRef() {
+        return this.$root;
+    }
+
+    /**
      * Initializes all elements with the class `.sm-flash` as a Flash instance
      * and returns all instances as an array.
      *
@@ -65,6 +76,40 @@ class Flash {
         const $flashes = document.querySelectorAll('.sm-flash');
 
         return Array.prototype.map.call($flashes, $flash => new Flash($flash));
+    }
+
+    /**
+     * Creates a new flash instance programatically.
+     *
+     * @typedef {object} FlashOptions
+     * @property {bool} [closable]
+     * @property {number} [hideAfter]
+     *
+     * @param {string} message
+     * @param {FlashOptions} options
+     * @returns {Flash} Flash message instance
+     */
+    static create(message, options = {}) {
+        const $flashElement = document.createElement('div');
+        $flashElement.classList.add('sm-flash');
+
+        const $innerWrapper = document.createElement('div');
+        $innerWrapper.classList.add('inner-wrapper');
+        $innerWrapper.innerHTML = message;
+        $flashElement.appendChild($innerWrapper);
+
+        if (options.closable) {
+            $flashElement.setAttribute('data-closable', 'true');
+        }
+
+        if (options.hideAfter) {
+            $flashElement.setAttribute(
+                'data-hide-after',
+                options.hideAfter.toString(),
+            );
+        }
+
+        return new Flash($flashElement);
     }
 }
 
