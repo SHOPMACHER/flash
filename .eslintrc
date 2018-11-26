@@ -12,7 +12,8 @@
     "global-require": "off",
     "class-methods-use-this": "off",
     "import/no-unresolved": "off",
-    "import/no-extraneous-dependencies": "off"
+    "import/no-extraneous-dependencies": "off",
+    "arrow-parens": "off"
   },
   "extends": [
     "eslint:recommended",
