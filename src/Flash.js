@@ -47,14 +47,18 @@ class Flash {
      * Shows the flash message.
      */
     show() {
-        this.$root.classList.add('visible');
+        window.requestAnimationFrame(() => {
+            this.$root.classList.add('visible');
+        });
     }
 
     /**
      * Hides the flash message.
      */
     hide() {
-        this.$root.classList.remove('visible');
+        window.requestAnimationFrame(() => {
+            this.$root.classList.remove('visible');
+        });
     }
 
     /**

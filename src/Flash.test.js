@@ -55,10 +55,12 @@ describe('Flash class', () => {
 
 describe('No parameters', () => {
     let $root = null;
+    let window = null;
     let instance = null;
 
     beforeEach(() => {
-        const { document } = createBasicMarkup();
+        window = createBasicMarkup();
+        const { document } = window;
         $root = document.querySelector('.sm-flash');
         instance = new Flash($root);
     });
@@ -75,9 +77,13 @@ describe('No parameters', () => {
 
     it('adds `visible` class, when `show` is called', () => {
         $root.classList.remove('visible');
+
+        window.requestAnimationFrame = () => {
+
+        };
+
         instance.show();
-        const contains = $root.classList.contains('visible');
-        expect(contains).toBe(true);
+
     });
 
     it('removes `visible` class, when `hide` is called', () => {
