@@ -1,6 +1,6 @@
 import { JSDOM } from 'jsdom';
 
-export default (beforeParse) => {
+export default beforeParse => {
     const { window } = new JSDOM(
         `
           <div class="sm-flash">
