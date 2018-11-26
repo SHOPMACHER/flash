@@ -83,6 +83,7 @@ class Flash {
      * @typedef {object} FlashOptions
      * @property {bool} [closable]
      * @property {number} [hideAfter]
+     * @property {HTMLElement} [appendTo]
      *
      * @param {string} message
      * @param {FlashOptions} options
@@ -106,6 +107,10 @@ class Flash {
                 'data-hide-after',
                 options.hideAfter.toString(),
             );
+        }
+
+        if (options.appendTo instanceof HTMLElement) {
+            options.appendTo.appendChild($flashElement);
         }
 
         return new Flash($flashElement);
