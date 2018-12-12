@@ -29,9 +29,7 @@ class Flash {
             );
 
             if (!isNaN(hideAfter)) {
-                window.addEventListener('load', () => {
-                    setTimeout(this.hide.bind(this), hideAfter);
-                });
+                setTimeout(this.hide.bind(this), hideAfter);
             } else {
                 throw new TypeError(
                     `data-hide-after has to be of type number, but has value '${hideAfter}'`,
